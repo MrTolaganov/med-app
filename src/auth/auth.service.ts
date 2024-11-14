@@ -30,7 +30,7 @@ export class AuthService {
     if (!correctPassword) return { user: null, message: 'Incorrect password' }
     const { _id, fullName, isDoctor } = existedUser
     const userObj = { _id, fullName, email, isDoctor }
-    return { user: userObj }
+    return { user: userObj, message: 'User has just signed in successfully' }
   }
   async verifyCode(verifyCodeDto: VerifyCodeDto) {
     const { email, enteredCode, expectedCode } = verifyCodeDto
@@ -39,11 +39,6 @@ export class AuthService {
       return { user: null, message: 'Verification code is incorrect' }
     }
     const user = await this.userModel.findOne({ email }).select('fullName email isDoctor')
-    return { user, message: 'Code verifies successfully' }
-  }
-  async addChat(userId: string, chatId: string) {
-    const existedUser = await this.userModel.findById(userId)
-    if (!existedUser) return { user: null, message: 'User not found' }
-    await this.userModel.findByIdAndUpdate(userId, { $push: { chats: chatId } })
+    return { user, message: 'Code verified successfully' }
   }
 }
