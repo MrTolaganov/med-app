@@ -39,6 +39,11 @@ export class AuthService {
       return { user: null, message: 'Verification code is incorrect' }
     }
     const user = await this.userModel.findOne({ email }).select('fullName email isDoctor')
-    return { user }
+    return { user, message: 'Code verifies successfully' }
+  }
+  async addChat(userId: string, chatId: string) {
+    const existedUser = await this.userModel.findById(userId)
+    if (!existedUser) return { user: null, message: 'User not found' }
+    await this.userModel.findByIdAndUpdate(userId, { $push: { chats: chatId } })
   }
 }
