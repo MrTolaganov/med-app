@@ -41,4 +41,8 @@ export class AuthService {
     const user = await this.userModel.findOne({ email }).select('fullName email isDoctor')
     return { user, message: 'Code verified successfully' }
   }
+  async getDoctors() {
+    const doctors = await this.userModel.find({ isDoctor: true }).select('fullName email isDoctor')
+    return { doctors }
+  }
 }

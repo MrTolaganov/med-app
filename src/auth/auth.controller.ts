@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { SignInDto, SignUpDto, VerifyCodeDto } from './user.dto'
 
@@ -22,5 +22,10 @@ export class AuthController {
   @UsePipes(ValidationPipe)
   async verifyCode(@Body() verifyCodeDto: VerifyCodeDto) {
     return await this.authService.verifyCode(verifyCodeDto)
+  }
+
+  @Get('/get-doctors')
+  async getDoctors() {
+    return await this.authService.getDoctors()
   }
 }
