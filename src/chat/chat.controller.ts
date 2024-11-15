@@ -43,4 +43,8 @@ export class ChatController {
   async deleteChat(@Param('chatId') chatId: string) {
     return await this.chatService.deleteChat(chatId)
   }
+  @Get('/get-allchats')
+  async getAllChats() {
+    return await this.chatService.getAllChats()
+  }
 }

@@ -28,4 +28,9 @@ export class AuthController {
   async getDoctors() {
     return await this.authService.getDoctors()
   }
+
+  @Get('/get-allusers')
+  async getAllUsers() {
+    return await this.authService.getAllUsers()
+  }
 }

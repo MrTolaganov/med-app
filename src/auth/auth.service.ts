@@ -45,4 +45,8 @@ export class AuthService {
     const doctors = await this.userModel.find({ isDoctor: true }).select('fullName email isDoctor')
     return { doctors }
   }
+  async getAllUsers() {
+    const users = await this.userModel.find().select('fullName email isDoctor')
+    return { users }
+  }
 }

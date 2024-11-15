@@ -4,7 +4,6 @@ import { Model } from 'mongoose'
 import { InjectModel } from '@nestjs/mongoose'
 import { User } from 'src/auth/user.schema'
 import { GetChatDto, PostChatDto } from './chat.dto'
-// import { AuthService } from 'src/auth/auth.service'
 
 @Injectable()
 export class ChatService {
@@ -53,5 +52,10 @@ export class ChatService {
   async deleteChat(chatId: string) {
     await this.chatModel.findByIdAndDelete(chatId)
     return { message: 'Chat deleted successfully' }
+  }
+
+  async getAllChats() {
+    const chats = await this.chatModel.find()
+    return { chats }
   }
 }
